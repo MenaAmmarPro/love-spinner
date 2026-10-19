@@ -585,6 +585,18 @@
     if (typeof window !== "undefined" && window.addEventListener) {
       window.addEventListener("resize", fitCanvas);
     }
+
+    if (typeof document !== "undefined" && document.addEventListener) {
+      document.addEventListener("keydown", function (event) {
+        var target = event.target || {};
+        var tag = target.tagName ? String(target.tagName).toLowerCase() : "";
+        if (tag === "input" || tag === "textarea" || tag === "select") return;
+        if (event.key === " " || event.key === "s" || event.key === "S") {
+          if (event.preventDefault) event.preventDefault();
+          spin();
+        }
+      });
+    }
   }
 
   function boot() {
