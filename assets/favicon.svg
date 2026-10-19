@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Decision wheel for Mena">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="32%" r="78%">
+      <stop offset="0%" stop-color="#1a1d43"/>
+      <stop offset="100%" stop-color="#090b20"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#bg)"/>
+  <circle cx="32" cy="32" r="20" fill="none" stroke="#ff9fcf" stroke-width="3"/>
+  <path d="M32 12 L32 32 L52 32 Z" fill="#bba6ff" opacity="0.85"/>
+  <path d="M32 52 L32 32 L12 32 Z" fill="#ff72b8" opacity="0.55"/>
+  <path d="M32 20.5 c-1.4-3.4-6.8-3.4-6.8 1.1 0 3.4 4.4 6.2 6.8 8.1 2.4-1.9 6.8-4.7 6.8-8.1 0-4.5-5.4-4.5-6.8-1.1z" fill="#ffffff"/>
+  <circle cx="32" cy="32" r="3.4" fill="#ffffff"/>
+</svg>
