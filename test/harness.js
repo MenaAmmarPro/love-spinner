@@ -171,6 +171,16 @@ eq(NS.upsertPreset([], "", ["a", "b"]).length, 0, "upsertPreset needs a name");
 eq(NS.removePreset(up, "Date night").length, 0, "removePreset removes by name");
 eq(NS.removePreset(up, "Nope").length, 1, "removePreset keeps others");
 
+/* ---------------- result history ---------------- */
+eq(NS.sanitizeHistory(["a", "", null, "b", "  c  "]).join("|"), "a|b|c", "sanitizeHistory cleans");
+eq(NS.sanitizeHistory("nope").length, 0, "sanitizeHistory tolerates non-arrays");
+eq(NS.pushResult([], "Pizza").join(","), "Pizza", "pushResult adds the first item");
+eq(NS.pushResult(["b"], "a").join(","), "a,b", "pushResult prepends newest");
+eq(NS.pushResult(["b", "a"], "c", 2).join(","), "c,b", "pushResult respects max");
+eq(NS.pushResult(["b"], "  ").join(","), "b", "pushResult ignores blanks");
+eq(NS.pushResult([], "", 5).length, 0, "pushResult with blank value is a no-op");
+assert(NS.pushResult(["a"], "b", 0).join(",") === "b,a", "pushResult fallback max on bad limit");
+
 /* ---------------- shuffle (deterministic) ---------------- */
 const shuffled = NS.shuffleOptions(["1", "2", "3", "4"], () => 0);
 eq(shuffled.length, 4, "shuffle keeps all items");
@@ -183,11 +193,13 @@ assert(st.presets.length >= 3, "fresh load seeds default presets");
 st.options = ["Pizza", "Pasta"];
 st.spins = 7;
 st.lastResult = "Pasta";
+st.history = ["Pasta", "Pizza"];
 NS.save();
 const reloaded = NS.load();
 eq(reloaded.options.join(","), "Pizza,Pasta", "options survive a save/load");
 eq(reloaded.spins, 7, "spins survive a save/load");
 eq(reloaded.lastResult, "Pasta", "lastResult survives a save/load");
+eq(reloaded.history.join(","), "Pasta,Pizza", "history survives a save/load");
 
 /* ---------------- messy input is repaired, not fatal ---------------- */
 sandbox.localStorage.setItem("mena-spinner", "{not valid json");

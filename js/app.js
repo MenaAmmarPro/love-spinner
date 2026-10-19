@@ -13,6 +13,7 @@
   var TAU = Math.PI * 2;
   var MAX_OPTIONS = 24;
   var MAX_PRESETS = 16;
+  var MAX_HISTORY = 6;
   var COLORS = ["#ff9fcf", "#bba6ff", "#ff72b8", "#ffd166", "#7fe0ff", "#9dffb0"];
 
   var state = {
@@ -20,6 +21,7 @@
     presets: [],
     spins: 0,
     lastResult: "",
+    history: [],
     rotation: 0
   };
 
@@ -175,6 +177,29 @@
     return out.filter(function (p) { return p.name.toLowerCase() !== clean; });
   }
 
+  function sanitizeHistory(list) {
+    var out = [];
+    if (Array.isArray(list)) {
+      for (var i = 0; i < list.length && out.length < MAX_HISTORY; i += 1) {
+        var text = cleanText(list[i]);
+        if (text) out.push(text);
+      }
+    }
+    return out;
+  }
+
+  function pushResult(history, value, max) {
+    var out = sanitizeHistory(history);
+    var text = cleanText(value);
+    var limit = Math.floor(Number(max));
+    if (!isFinite(limit) || limit < 1) limit = MAX_HISTORY;
+    if (text) {
+      out.unshift(text);
+      out = out.slice(0, limit);
+    }
+    return out;
+  }
+
   function defaultPresets() {
     return [
       { name: "What to eat", options: ["Pizza", "Biryani", "Sushi", "Burgers", "Pasta", "Salad"] },
@@ -198,6 +223,7 @@
     if (!state.presets.length) state.presets = defaultPresets();
     state.spins = Math.max(0, Math.floor(Number(saved.spins)) || 0);
     state.lastResult = typeof saved.lastResult === "string" ? cleanText(saved.lastResult) : "";
+    state.history = sanitizeHistory(saved.history);
     state.rotation = 0;
     return state;
   }
@@ -208,7 +234,8 @@
         options: state.options,
         presets: state.presets,
         spins: state.spins,
-        lastResult: state.lastResult
+        lastResult: state.lastResult,
+        history: state.history
       }));
     } catch (e) { /* ignore */ }
   }
@@ -344,6 +371,27 @@
     });
   }
 
+  function renderHistory() {
+    var list = document.getElementById("result-history");
+    if (!list) return;
+    list.textContent = "";
+
+    if (!state.history.length) {
+      var empty = document.createElement("li");
+      empty.className = "is-empty";
+      empty.textContent = "no spins yet";
+      list.appendChild(empty);
+      return;
+    }
+
+    state.history.forEach(function (text, index) {
+      var li = document.createElement("li");
+      if (index === 0) li.className = "is-latest";
+      li.textContent = text;
+      list.appendChild(li);
+    });
+  }
+
   function renderPresets() {
     var wrap = document.getElementById("preset-list");
     if (!wrap) return;
@@ -428,11 +476,13 @@
       state.rotation = to;
       state.spins += 1;
       state.lastResult = state.options[target];
+      state.history = pushResult(state.history, state.lastResult, MAX_HISTORY);
       spinning = false;
       save();
       updateStats();
       drawWheel(state.rotation);
       setResult(state.lastResult);
+      renderHistory();
       note("The wheel has spoken \u2665");
       if (typeof window.heartBurst === "function") {
         window.heartBurst(window.innerWidth / 2, window.innerHeight / 3, 16);
@@ -543,6 +593,7 @@
     load();
     renderOptions();
     renderPresets();
+    renderHistory();
     setResult(state.lastResult);
     drawWheel(state.rotation);
     fitCanvas();
@@ -572,6 +623,8 @@
     sanitizePresets: sanitizePresets,
     upsertPreset: upsertPreset,
     removePreset: removePreset,
+    sanitizeHistory: sanitizeHistory,
+    pushResult: pushResult,
     defaultPresets: defaultPresets,
     load: load,
     save: save,
