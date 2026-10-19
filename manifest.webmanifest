@@ -1,0 +1,14 @@
+{
+  "name": "The Decision Wheel — Love for Mena",
+  "short_name": "Decision Wheel",
+  "description": "Spin it and let love choose for us — what to eat, what to watch, who pays.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#090b20",
+  "theme_color": "#090b20",
+  "icons": [
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
