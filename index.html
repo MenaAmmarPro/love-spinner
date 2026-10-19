@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b20">
+  <meta name="description" content="The Decision Wheel — spin it and let love choose for us. What to eat, what to watch, who pays. A little wheel for Mena.">
+  <title>The Decision Wheel ✦ Love for Mena</title>
+  <link rel="canonical" href="https://menaammarpro.github.io/love-spinner/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Decision Wheel — for Mena">
+  <meta property="og:title" content="The Decision Wheel ✦ Love for Mena">
+  <meta property="og:description" content="Spin it and let love choose for us.">
+  <meta property="og:url" content="https://menaammarpro.github.io/love-spinner/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The Decision Wheel ✦ Love for Mena">
+  <meta name="twitter:description" content="Spin it and let love choose for us.">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Decision Wheel">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">✦ Decision Wheel</a>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">Menu</button>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a class="active" href="index.html">Home</a>
+      <a href="#wheel">Spin</a>
+      <a href="#options">Options</a>
+      <a href="#presets">Presets</a>
+      <div class="nav-more">
+        <button class="nav-more-toggle" type="button" aria-expanded="false">More <span class="caret">▾</span></button>
+        <div class="nav-more-menu">
+          <a href="https://menaammarpro.github.io/">All projects</a>
+          <a href="https://menaammarpro.github.io/loveformymena/">Our little universe ↗</a>
+          <a href="https://menaammarpro.github.io/love-arcade/">Arcade</a>
+          <a href="https://menaammarpro.github.io/love-reasons/">Reasons</a>
+        </div>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="Toggle color theme">Theme</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero spinner-hero">
+      <p class="eyebrow">LET LOVE DECIDE</p>
+      <div class="moon" aria-hidden="true">✦</div>
+      <h1>The decision <span>wheel.</span></h1>
+      <p class="hero-description">
+        Can't decide together? Spin it. What to eat, what to watch, who pays for
+        the pizza — let the wheel be the tie-breaker tonight.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#wheel">Spin the wheel <span>♥</span></a>
+        <a class="button button-ghost" href="#presets">Try a preset</a>
+      </div>
+      <p class="signature">Made with love, just for you <span>♥</span></p>
+    </section>
+
+    <section class="section" id="wheel">
+      <p class="eyebrow">THE SPIN</p>
+      <h2>Give it a <span>turn.</span></h2>
+
+      <div class="wheel-workspace">
+        <div class="canvas-wrap">
+          <canvas id="wheel-canvas" width="620" height="620" aria-label="Decision wheel"></canvas>
+          <div class="wheel-pointer" aria-hidden="true">▼</div>
+        </div>
+
+        <div class="wheel-side">
+          <button id="spin-button" class="button button-primary spin-button" type="button">Spin</button>
+          <div class="result-card" aria-live="polite">
+            <span class="result-label">The wheel says</span>
+            <strong id="result-text" class="result-text">—</strong>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <span class="stat-number" id="spin-count">0</span>
+              <span class="stat-label">spins</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number" id="option-count">0</span>
+              <span class="stat-label">options</span>
+            </div>
+          </div>
+          <p class="wheel-hint" id="wheel-note">Add a few options below, then spin ♥</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="options">
+      <p class="eyebrow">WHAT'S ON THE WHEEL</p>
+      <h2>Our <span>options.</span></h2>
+      <form id="option-form" class="inline-form" autocomplete="off">
+        <input id="option-input" type="text" maxlength="40" placeholder="Add an option…" aria-label="New option">
+        <button class="button button-primary" type="submit">Add</button>
+      </form>
+      <ul id="option-list" class="option-list"></ul>
+      <div class="row-actions">
+        <button id="clear-options" class="button button-ghost" type="button">Clear all</button>
+        <button id="shuffle-options" class="button button-ghost" type="button">Shuffle</button>
+      </div>
+    </section>
+
+    <section class="section" id="presets">
+      <p class="eyebrow">QUICK DECISIONS</p>
+      <h2>Presets.</h2>
+      <p class="section-note">One tap fills the wheel — or save the options you're
+        looking at now as your own preset.</p>
+      <div id="preset-list" class="preset-list"></div>
+      <form id="preset-form" class="inline-form" autocomplete="off">
+        <input id="preset-input" type="text" maxlength="30" placeholder="Name this set…" aria-label="Preset name">
+        <button class="button button-ghost" type="submit">Save current</button>
+      </form>
+      <p class="section-note" id="preset-note" aria-live="polite"></p>
+    </section>
+
+    <section class="section" id="about">
+      <p class="eyebrow">JUST FOR US</p>
+      <h2>About this wheel.</h2>
+      <ul class="about-list">
+        <li><strong>Spin</strong> — the wheel eases to a stop and tells you the answer.</li>
+        <li><strong>Options</strong> — add as many as you like, clear them, or shuffle the order.</li>
+        <li><strong>Presets</strong> — ready-made sets for dinner, movie night and who pays.</li>
+        <li>Everything is remembered on this device only — no tracking, no network calls.</li>
+      </ul>
+      <div class="row-actions">
+        <button id="share-button" class="button button-ghost" type="button">Share this page</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Made with care <span>♥</span> for Mena</p>
+    <p class="footer-small">Karachi ⇄ Bucharest · spin it and see</p>
+  </footer>
+</body>
+</html>
