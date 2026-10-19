@@ -90,6 +90,39 @@
   font-size: 0.86rem;
 }
 
+.history-wrap {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.history-list li {
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.history-list li.is-latest {
+  border-color: var(--pink-strong);
+  color: var(--pink);
+}
+
+.history-list li.is-empty {
+  color: var(--muted);
+  font-style: italic;
+}
+
 .inline-form {
   display: flex;
   flex-wrap: wrap;
