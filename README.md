@@ -9,7 +9,9 @@ pizza. Part of the **Love for Mena** collection.
 
 - A canvas **decision wheel** with up to 24 options
 - **Spin** with a gentle ease-out animation — the wheel tells you the answer
+  (or press **Space** / **S**)
 - **Add / remove** options, **clear** them, or **shuffle** the order
+- A **recent results** strip remembers the last few answers
 - Ready-made **presets** (what to eat, what to watch, who pays, tonight) and you
   can save your own sets
 - Everything is remembered on this device — no tracking, no network calls
@@ -27,7 +29,7 @@ tested without a canvas:
   chosen option
 
 State is stored in localStorage under `mena-spinner` as
-`{ presets:[{name,options:[]}], options:[], spins, lastResult }`.
+`{ presets:[{name,options:[]}], options:[], spins, lastResult, history:[] }`.
 
 ## Files
 
