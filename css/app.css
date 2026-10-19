@@ -1,0 +1,238 @@
+/* love-spinner — page styles (built on css/theme.css) */
+
+.spinner-hero {
+  padding-block: clamp(2.5rem, 7vw, 4.5rem) clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.wheel-workspace {
+  display: grid;
+  gap: 1.4rem;
+  margin-top: 1.6rem;
+}
+
+.canvas-wrap {
+  position: relative;
+  justify-self: center;
+  width: min(560px, 100%);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: radial-gradient(120% 120% at 50% 0%, rgba(185, 139, 255, 0.14), rgba(9, 11, 32, 0.9));
+  box-shadow: var(--shadow);
+  padding: 6px;
+}
+
+#wheel-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
+.wheel-pointer {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--pink);
+  font-size: 1.9rem;
+  line-height: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+.wheel-side {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.spin-button {
+  width: 100%;
+  font-size: 1.05rem;
+  padding-block: 0.9rem;
+}
+
+.spin-button[disabled] {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.result-card {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  text-align: center;
+  min-height: 92px;
+  align-content: center;
+}
+
+.result-label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.result-text {
+  color: var(--pink);
+  font-size: 1.5rem;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.wheel-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.inline-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.inline-form input {
+  flex: 1 1 200px;
+  min-width: 0;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font: inherit;
+}
+
+.inline-form input:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 2px;
+}
+
+.option-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.option-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.option-text {
+  flex: 1 1 auto;
+  overflow-wrap: anywhere;
+}
+
+.option-remove {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.option-remove:hover {
+  color: var(--pink);
+  border-color: var(--pink);
+}
+
+.option-empty {
+  color: var(--muted);
+  font-style: italic;
+  padding: 0.4rem 0;
+}
+
+.row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.preset-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.preset-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.5rem 0.35rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.preset-apply {
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  padding: 0.15rem 0.1rem;
+}
+
+.preset-apply:hover {
+  color: var(--pink);
+}
+
+.preset-del {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  padding: 0.1rem 0.35rem;
+}
+
+.preset-del:hover {
+  color: var(--pink);
+}
+
+.about-list {
+  margin: 1rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.about-list strong {
+  color: var(--text);
+}
+
+@media (min-width: 820px) {
+  .wheel-workspace {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    align-items: center;
+  }
+}
