@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE = "decision-wheel-v1";
+const CACHE = "decision-wheel-v2";
 
 const ASSETS = [
   "./",
